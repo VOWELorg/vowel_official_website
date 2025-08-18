@@ -110,12 +110,28 @@
   }
 
   /* Officers */
-  .officers-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px}
-  .officer{
-    background:#0f0f12; border:1px solid rgba(255,255,255,.08); border-radius:14px; overflow:hidden; padding:12px; text-align:center;
-  }
-  .officer img{width:100%; height:220px; object-fit:cover; border-radius:10px}
-  .officer p{margin:10px 0 0}
+ .officers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.officer {
+  text-align: center;
+  padding: 10px;
+}
+
+.officer img {
+  width: 100%;
+  max-width: 120px;   /* Prevents oversized images */
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--peach);
+  margin-bottom: 10px;
+}
+
 
   /* Footer */
   footer{
@@ -645,3 +661,4 @@ function checkMatch(){
 </script>
 </body>
 </html>
+
