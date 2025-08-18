@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VOWEL Organization</title>
+<style>
+  :root{
+    --peach:#FF9F8E; --black:#0D0D0D; --mid:#141414; --text:#F5F5F6;
+    --muted:#BEBFC4; --card:#101012; --ring:rgba(255,159,142,.35);
+    --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:linear-gradient(180deg,var(--black),var(--mid));
+    color:var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+    line-height:1.6; overflow-x:hidden;
+  }
+  a{color:var(--peach); text-decoration:none}
+  .container{width:min(1180px,92%); margin:0 auto}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50; transition:all .25s ease;
+    backdrop-filter:saturate(120%) blur(10px);
+    background:rgba(13,13,13,.55); border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  header.scrolled{background:rgba(13,13,13,.75); padding:6px 0}
+  .nav{
+    display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+  .brand .dot{width:12px; height:12px; border-radius:50%; background:var(--peach)}
+  .nav-links{display:flex; gap:22px; align-items:center}
+  .nav-links a{color:#EDEDEF}
+  .hamburger{
+    display:none; width:38px; height:32px; border-radius:10px;
+    border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04);
+    justify-content:center; align-items:center; cursor:pointer;
+  }
+  .hamburger span,.hamburger::before,.hamburger::after{
+    content:""; display:block; width:18px; height:2px; background:#fff; border-radius:2px; transition:.25s;
+  }
+  .hamburger::before{transform:translateY(-6px)}
+  .hamburger::after{transform:translateY(6px)}
+  .mobile-panel{
+    display:none; position:fixed; inset:64px 16px auto 16px; background:#101014;
+    border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:12px; z-index:60; box-shadow:var(--shadow);
+  }
+  .mobile-panel a{display:block; padding:12px 10px; border-radius:10px; color:#fff}
+  .mobile-panel a:hover{background:rgba(255,255,255,.06)}
+
+  /* Hero */
+  .hero{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:36px; padding:56px 0 24px;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px; padding:6px 10px; font-size:12px; color:#CFCFD4;
+    border-radius:999px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02);
+  }
+  .badge .b{width:6px; height:6px; border-radius:50%; background:var(--peach)}
+  h1{font-size:clamp(28px, 4vw, 48px); line-height:1.1; margin:14px 0 10px; letter-spacing:.2px}
+  .lead{color:#DFE0E6; font-size:clamp(15px,1.8vw,18px)}
+  .cta{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.08);
+    background:var(--peach); color:#18181b; font-weight:800; box-shadow:var(--shadow);
+  }
+  .btn-outline{background:transparent; color:#fff; border-color:var(--ring)}
+  .logo-card{
+    position:relative; min-height:380px; border-radius:var(--radius); background:radial-gradient(1200px 400px at 50% -80%, rgba(255,159,142,.16), transparent 60%), var(--card);
+    box-shadow:var(--shadow); display:grid; place-items:center; overflow:hidden; border:1px solid rgba(255,255,255,.06);
+  }
+  .logo-card img{max-width:86%; height:auto; object-fit:contain; filter:drop-shadow(0 20px 30px rgba(0,0,0,.35));}
+
+  /* Events */
+  .section{padding:48px 0}
+  .section h2{color:var(--peach); margin:0 0 12px}
+  .events-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px;
+  }
+  .event-card{
+    position:relative; border-radius:14px; overflow:hidden; background:#0f0f12; border:1px solid rgba(255,255,255,.08);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .event-card:hover{transform:translateY(-2px) scale(1.02); box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .event-card img{width:100%; height:200px; object-fit:cover; display:block}
+  .event-cap{
+    position:absolute; inset:auto 0 0 0; padding:10px 12px; color:#fff; font-weight:700; font-size:14px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,.55), rgba(0,0,0,.75));
+    transform:translateY(0); opacity:1; transition:opacity .25s;
+  }
+  .event-card:hover .event-cap{opacity:1}
+
+  /* Modal */
+  .modal{
+    position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.6); z-index:80; padding:18px;
+  }
+  .modal.open{display:grid}
+  .modal-card{
+    width:min(950px, 96%); background:#0f0f12; color:#fff; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 60px rgba(0,0,0,.6);
+  }
+  .modal-img{width:100%; height:420px; object-fit:cover; display:block}
+  .modal-body{padding:16px 18px}
+  .modal-close{
+    position:absolute; top:14px; right:18px; width:42px; height:42px; border-radius:10px; border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.06); color:#fff; font-weight:800; cursor:pointer;
+  }
+
+  /* Officers */
+  .officers-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px}
+  .officer{
+    background:#0f0f12; border:1px solid rgba(255,255,255,.08); border-radius:14px; overflow:hidden; padding:12px; text-align:center;
+  }
+  .officer img{width:100%; height:220px; object-fit:cover; border-radius:10px}
+  .officer p{margin:10px 0 0}
+
+  /* Footer */
+  footer{
+    margin-top:24px; background:#0b0b0d; border-top:1px solid rgba(255,255,255,.06);
+  }
+  .foot{
+    display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center; padding:20px 0;
+  }
+  .foot-logos{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+  .foot-logos img{width:42px; height:42px; object-fit:contain; filter:grayscale(.1) brightness(.95)}
+  .copy{color:#cfcfd4; font-size:14px}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  /* Cursor peach gradient */
+  .cursor-glow{
+    position:fixed; pointer-events:none; inset:0; z-index:5; mix-blend-mode:screen;
+    background: radial-gradient(160px 160px at var(--x,50%) var(--y,30%), rgba(255,159,142,.25), rgba(255,159,142,0) 60%);
+    opacity:.9; transition:background-position .06s linear;
+  }
+
+  /* Responsive */
+  @media (max-width: 980px){
+    .hero{grid-template-columns:1fr; padding-top:38px}
+    .logo-card{min-height:300px}
+    .logo-card img{max-width:70%}
+  }
+  @media (max-width: 900px){
+    .hamburger{display:flex}
+    .nav-links{display:none}
+  }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Left = Contact Form, Right = Game */
+  gap: 20px;
+  align-items: center; /* Center both columns vertically */
+  min-height: 400px; /* Keeps the row balanced */
+}
+
+.contact-left form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-left input,
+.contact-left textarea,
+.contact-left button {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.mini-game {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.memory-game {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.card {
+  width: 70px;
+  height: 90px;
+  background: #222;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: transparent;
+  cursor: pointer;
+  transition: transform 0.4s, background 0.3s;
+}
+
+.card.flipped {
+  background: var(--peach);
+  color: #111;
+  transform: rotateY(180deg);
+}
+
+.fb-link {
+  text-align: center;
+  padding: 10px;
+  background: var(--peach);
+  color: #111;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.fb-link:hover {
+  background: #ffb07a;
+}
+
+@media(max-width:768px){
+  .contact-grid {
+    grid-template-columns: 1fr; /* Stack on mobile */
+    align-items: start; /* Reset for mobile */
+  }
+  .mini-game { order: -1; } /* Game goes above on phones */
+}
+
+</style>
+<link rel="icon" type="image/png" href="favicon.png">
+
+</head>
+<body>
+
+<!-- cursor glow -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<header id="topbar">
+  <div class="container nav">
+    <div class="brand"><span class="dot"></span> VOWEL</div>
+    <nav class="nav-links">
+      <a href="#events">Events</a>
+      <a href="#about">About</a>
+      <a href="#membership">Membership</a>
+      <a href="#officers">Officers</a>
+      <a href="#contact" class="btn btn-outline">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open Menu"><span></span></button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#events">Events</a>
+    <a href="#about">About</a>
+    <a href="#membership">Membership</a>
+    <a href="#officers">Officers</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main class="container">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="reveal">
+      <span class="badge"><span class="b"></span> Official Organization of ISU–Ilagan</span>
+      <h1>Versatile Orators and Writers in English Language</h1>
+      <p class="lead">
+        A community of empowered young communicators who uphold excellence in English communication,
+        foster intercultural understanding, and advocate for peace, literacy, and global citizenship.
+      </p>
+      <div class="cta">
+        <a href="#about" class="btn">About Us</a>
+        <a href="#events" class="btn btn-outline">View Events</a>
+      </div>
+    </div>
+    <div class="logo-card reveal">
+      <!-- Replace logo.png with your real PNG -->
+      <img src="logo.png" alt="VOWEL Logo">
+    </div>
+  </section>
+
+  <!-- EVENTS (right under hero) -->
+  <section id="events" class="section reveal">
+    <h2>Our Events</h2>
+    <p class="lead" style="margin-top:0">Browse highlights from recent activities, competitions, and outreach.</p>
+    <div class="events-grid" id="eventsGrid">
+      <!-- Cards injected from events/events.json -->
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section reveal">
+    <h2>About Us</h2>
+    <p><strong>Preamble:</strong> We, the members of the Versatile Orators and Writers in English Language (VOWEL) of the Isabela State University, City of Ilagan Isabela, with the aid of the Almighty God in order to provide an organization that will enhance students’ talents/skills/knowledge in the field of English communication and will promote unity and camaraderie among students, do hereby promulgate this Constitution and By-Laws.</p>
+    <h3>Vision</h3>
+    <p>A community of empowered young communicators who uphold excellence in English communication, foster intercultural understanding, and advocate for peace, literacy, and global citizenship in the spirit of unity and social responsibility.</p>
+    <h3>Mission</h3>
+    <ul>
+      <li>Nurture the talents of student orators and writers.</li>
+      <li>Promote effective English communication for social transformation.</li>
+      <li>Create inclusive platforms for speech, writing, and debate.</li>
+      <li>Support the UNESCO ideals of peace, human rights, and intercultural dialogue (SDG 4: Quality Education).</li>
+    </ul>
+  </section>
+
+  <!-- MEMBERSHIP -->
+  <section id="membership" class="section reveal">
+    <h2>Membership</h2>
+    <p><strong>Qualification:</strong> Open to all bona fide students of ISU–Ilagan, ages 18–28; compulsory for BSEd English majors and freshmen aspirants.</p>
+    <p><strong>Duties:</strong> Attend meetings, pay authorized dues, and adhere to all policies and regulations.</p>
+    <p><strong>Rights:</strong> Inspect organization records, participate in elections, and take part in decision-making.</p>
+  </section>
+
+  <!-- OFFICERS (you can add photos later in /officers/) -->
+  <section id="officers" class="section reveal">
+  <h2>Officers (A.Y. 2024–2025)</h2>
+  <div class="officers-grid">
+
+    <!-- Executive Officers -->
+    <div class="officer">
+      <img src="officers/logo.png" alt="President">
+      <p><strong>President:</strong> Bonjoe Sumio</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Internal VP">
+      <p><strong>Internal Vice President:</strong> Joshua Salvador</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="External VP">
+      <p><strong>External Vice President:</strong> Alexa Andriey Dela Rosa</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="General Secretary">
+      <p><strong>General Secretary:</strong> A-z Parena</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Assistant Secretary">
+      <p><strong>Assistant Secretary:</strong> Aldrin Bagasin</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Treasurer">
+      <p><strong>Treasurer:</strong> Lycabea Mae Batnag</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Auditor">
+      <p><strong>Auditor:</strong> Angelyn Coloma</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Business Manager 1">
+      <p><strong>Business Manager:</strong> Judy Mae Valdez</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Business Manager 2">
+      <p><strong>Business Manager:</strong> Rosebel Abrenilla</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Resource Manager 1">
+      <p><strong>Resource Manager:</strong> Loraine Ajel</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Resource Manager 2">
+      <p><strong>Resource Manager:</strong> Michel Barlolong</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Attendance Officer">
+      <p><strong>Attendance Officer:</strong> Bejay Basillo</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Accomplishment Officer">
+      <p><strong>Accomplishment Officer:</strong> Ferdilyn Vea</p>
+    </div>
+
+    <!-- Representatives -->
+    <div class="officer">
+      <img src="officers/logo.png" alt="1st Year Representative">
+      <p><strong>1st Year Representative:</strong> Myka Biscarra</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="2nd Year Representative">
+      <p><strong>2nd Year Representative:</strong> Graciel Ann Martinez</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="3rd Year Representative">
+      <p><strong>3rd Year Representative:</strong> Sheryn Concepcion</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="4th Year Representative">
+      <p><strong>4th Year Representative:</strong> Jaypee Abul</p>
+    </div>
+
+    <!-- Media Team -->
+    <div class="officer">
+      <img src="officers/logo.png" alt="Documentation Officer">
+      <p><strong>Documentation Officer:</strong> Alexis Temperante</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Videographer">
+      <p><strong>Videographer:</strong> Reymart Ramirez</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Editor">
+      <p><strong>Editor:</strong> Marc Kevin Sumio</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Broadcaster 1">
+      <p><strong>Broadcaster:</strong> Nicole Asuero</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Broadcaster 2">
+      <p><strong>Broadcaster:</strong> Lhord Jedrick Mauricio</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Broadcaster 3">
+      <p><strong>Broadcaster:</strong> Marlo Navarro</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="News Writer & Caption Maker">
+      <p><strong>News Writer & Caption Maker:</strong> Dheejay Justo</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Creative Head">
+      <p><strong>Creative Head:</strong> Annica Retutas</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Media & Online Officer">
+      <p><strong>Media & Online Officer:</strong> Kath Leen Pascua</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Layout Artist 1">
+      <p><strong>Layout Artist:</strong> Thizally Dumalay</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Layout Artist 2">
+      <p><strong>Layout Artist:</strong> Jel Elija Gabiran</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Sentinel 1">
+      <p><strong>Sentinel:</strong> Emman Due</p>
+    </div>
+    <div class="officer">
+      <img src="officers/logo.png" alt="Sentinel 2">
+      <p><strong>Sentinel:</strong> Mark Jay Aggabao</p>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="contact" class="section">
+  <h2> </h2>
+  <div class="contact-grid">
+    
+    <!-- Left Column: Contact Form + Facebook -->
+    <div class="contact-left">
+      <h2> Contact Us </h2>
+      <form id="contactForm">
+        <input id="name" required placeholder="Your name"/>
+        <input id="email" required type="email" placeholder="Email"/>
+        <textarea id="message" rows="4" placeholder="Message"></textarea>
+        <button type="submit"> Submit </button>
+
+        <!-- Facebook link inside form flow -->
+        <a href="https://www.facebook.com/VOWELtwenty11" target="_blank" class="fb-link">
+          📘 Follow us on Facebook
+        </a>
+      </form>
+    </div>
+
+    <!-- Right Column: Memory Game -->
+    <div class="mini-game">
+      <h2> <center>Mini Flip Game</center></h2>
+      <div id="memory-game" class="memory-game"></div>
+      <p id="gameResult"></p>
+    </div>
+
+  </div>
+</section>
+
+
+<footer>
+  <div class="container foot">
+    <div class="copy">© <span id="year"></span> VOWEL — Isabela State University, Ilagan Campus</div>
+    <div class="foot-logos">
+      <img src="footer/logo1.png" alt="Logo 1">
+      <img src="footer/logo2.png" alt="Logo 2">
+      <img src="footer/logo3.png" alt="Logo 3">
+      <img src="footer/logo4.png" alt="Logo 4">
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ===== Config ===== */
+  const CONTACT_EMAIL = "vowelorg@gmail.com"; // <-- Email address
+
+  /* ===== Header scroll + hamburger ===== */
+  const topbar = document.getElementById('topbar');
+  const hamburger = document.getElementById('hamburger');
+  const mobilePanel = document.getElementById('mobilePanel');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) topbar.classList.add('scrolled');
+    else topbar.classList.remove('scrolled');
+  });
+
+  hamburger.addEventListener('click', () => {
+    mobilePanel.style.display = (mobilePanel.style.display === 'block') ? 'none' : 'block';
+  });
+  mobilePanel.addEventListener('click', e => {
+    if (e.target.tagName === 'A') mobilePanel.style.display = 'none';
+  });
+
+  /* ===== Cursor peach gradient (mouse + touch) ===== */
+  const glow = document.getElementById('cursorGlow');
+  function setGlow(x, y){
+    glow.style.setProperty('--x', x + 'px');
+    glow.style.setProperty('--y', y + 'px');
+  }
+  window.addEventListener('mousemove', e => setGlow(e.clientX, e.clientY));
+  window.addEventListener('touchmove', e => {
+    const t = e.touches[0]; if (t) setGlow(t.clientX, t.clientY);
+  }, {passive:true});
+
+  /* ===== Reveal on scroll ===== */
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(ent=>{
+      if(ent.isIntersecting){ ent.target.classList.add('in'); io.unobserve(ent.target); }
+    });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ===== Contact form (mailto) ===== */
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const msg = document.getElementById('message').value.trim();
+    const subject = encodeURIComponent(`Message from ${name}`);
+    const body = encodeURIComponent(`From: ${name} <${email}>\n\n${msg}`);
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+  });
+
+  /* ===== Events: load from /events/events.json =====
+     JSON shape: [{ "image":"event1.jpg", "caption":"Short caption", "story":"Full story..." }, ...]
+  */
+  const grid = document.getElementById('eventsGrid');
+  const modal = document.createElement('div'); modal.className = 'modal'; modal.innerHTML = `
+    <div class="modal-card">
+      <button class="modal-close" aria-label="Close">✕</button>
+      <img class="modal-img" alt="">
+      <div class="modal-body">
+        <h3 style="margin:.4rem 0 0.2rem; color:var(--peach)"></h3>
+        <p class="story" style="margin:.2rem 0 1rem; color:#e9e9ee"></p>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+
+  const mClose = modal.querySelector('.modal-close');
+  const mImg = modal.querySelector('.modal-img');
+  const mTitle = modal.querySelector('h3');
+  const mStory = modal.querySelector('.story');
+
+  function openModal(src, caption, story){
+    mImg.src = src; mTitle.textContent = caption || 'Event'; mStory.textContent = story || '';
+    modal.classList.add('open');
+  }
+  function closeModal(){ modal.classList.remove('open'); }
+  mClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+
+  async function loadEvents(){
+    try{
+      const res = await fetch('events/events.json');
+      const items = await res.json();
+      items.forEach(it=>{
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        const src = `events/${it.image}`;
+        card.innerHTML = `
+          <img src="${src}" alt="${it.caption || 'Event'}">
+          <div class="event-cap">${it.caption || ''}</div>`;
+        card.addEventListener('click', ()=> openModal(src, it.caption, it.story));
+        grid.appendChild(card);
+      });
+    }catch(err){
+      console.error('Failed to load events:', err);
+      grid.innerHTML = `<p style="color:#bbb">Add <code>/events/events.json</code> and images in <code>/events/</code> to see your gallery.</p>`;
+    }
+  }
+  loadEvents();
+
+const cardsArray = ['🍎','🍌','🍇','🍒','🍋','🥝']; // icons
+let cards = [...cardsArray, ...cardsArray]; // duplicate for pairs
+
+// shuffle cards
+cards = cards.sort(() => 0.5 - Math.random());
+
+const gameBoard = document.getElementById('memory-game');
+const gameResult = document.getElementById('gameResult');
+
+let flipped = [];
+let matched = [];
+
+cards.forEach((icon, index) => {
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.dataset.icon = icon;
+  card.innerHTML = icon;
+  
+  card.addEventListener('click', () => flipCard(card));
+  gameBoard.appendChild(card);
+});
+
+function flipCard(card){
+  if(flipped.length < 2 && !card.classList.contains('flipped')){
+    card.classList.add('flipped');
+    flipped.push(card);
+
+    if(flipped.length === 2){
+      setTimeout(checkMatch, 800);
+    }
+  }
+}
+
+function checkMatch(){
+  const [c1, c2] = flipped;
+  if(c1.dataset.icon === c2.dataset.icon){
+    matched.push(c1, c2);
+  } else {
+    c1.classList.remove('flipped');
+    c2.classList.remove('flipped');
+  }
+  flipped = [];
+
+  if(matched.length === cards.length){
+    gameResult.textContent = "🎉 You won! Refresh to play again.";
+  }
+}
+
+
+  /* Year in footer */
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
