@@ -1,0 +1,276 @@
+[
+  {
+    "id": 1,
+    "name": "Bonjoe Sumio",
+    "role": "President",
+    "img": "officers/1.png",
+    "altImg": "officers/1b.png",
+    "committee": "Executive Position",
+    "works": "Spearheaded leadership initiatives."
+  },
+  {
+    "id": 2,
+    "name": "Joshua T. Salvador",
+    "role": "Internal Vice President",
+    "img": "officers/2.png",
+    "altImg": "officers/2b.png",
+    "committee": "Executive Position",
+    "works": "Assisted internal coordination."
+  },
+  {
+    "id": 3,
+    "name": "Alexa Andriey S. Dela Rosa",
+    "role": "External Vice President",
+    "img": "officers/3.png",
+    "altImg": "officers/3b.png",
+    "committee": "Executive Position",
+    "works": "Handled external relations."
+  },
+  {
+    "id": 4,
+    "name": "A-Z B. Pareña",
+    "role": "General Secretary",
+    "img": "officers/4.png",
+    "altImg": "officers/4b.png",
+    "committee": "Executive Position",
+    "works": "Maintained records and communications."
+  },
+  {
+    "id": 5,
+    "name": "Aldrin Bagasin",
+    "role": "Assistant Secretary",
+    "img": "officers/5.png",
+    "altImg": "officers/5b.png",
+    "committee": "Executive Position",
+    "works": "Assisted documentation and admin."
+  },
+
+  {
+    "id": 6,
+    "name": "Lycabea Mae S. Batnag",
+    "role": "Treasurer",
+    "img": "officers/6.png",
+    "altImg": "officers/6b.png",
+    "committee": "Budget and Resources Committee",
+    "works": "Managed funds and budgets."
+  },
+  {
+    "id": 7,
+    "name": "Angelyn J. Coloma",
+    "role": "Auditor",
+    "img": "officers/7.png",
+    "altImg": "officers/7b.png",
+    "committee": "Budget and Resources Committee",
+    "works": "Performed financial checks."
+  },
+  {
+    "id": 8,
+    "name": "Judy Mae R. Valdez",
+    "role": "Business Manager",
+    "img": "officers/8.png",
+    "altImg": "officers/8b.png",
+    "committee": "Budget and Resources Committee",
+    "works": "Oversaw vendor relations."
+  },
+  {
+    "id": 9,
+    "name": "Rosebel B. Abrenilla",
+    "role": "Business Manager",
+    "img": "officers/9.png",
+    "altImg": "officers/9b.png",
+    "committee": "Budget and Resources Committee",
+    "works": "Co-managed business tasks."
+  },
+  {
+    "id": 10,
+    "name": "Loraine Ajel",
+    "role": "Resource Manager",
+    "img": "officers/10.png",
+    "altImg": "officers/10b.png",
+    "committee": "Budget and Resources Committee",
+    "works": "Handled materials and inventory."
+  },
+  {
+    "id": 11,
+    "name": "Michel Barlolong",
+    "role": "Resource Manager",
+    "img": "officers/11.png",
+    "altImg": "officers/11b.png",
+    "committee": "Budget and Resources Committee",
+    "works": "Supported resource distribution."
+  },
+
+  {
+    "id": 12,
+    "name": "Bejay B. Basilio",
+    "role": "Attendance Officer",
+    "img": "officers/12.png",
+    "altImg": "officers/12b.png",
+    "committee": "Membership & Records Committee",
+    "works": "Managed attendance and logs."
+  },
+  {
+    "id": 13,
+    "name": "Ferdilyn Vea",
+    "role": "Accomplishment Report Officer",
+    "img": "officers/13.png",
+    "altImg": "officers/13b.png",
+    "committee": "Membership & Records Committee",
+    "works": "Compiled accomplishment reports."
+  },
+  {
+    "id": 14,
+    "name": "Myka V. Biscarra",
+    "role": "Freshmen Representative",
+    "img": "officers/14.png",
+    "altImg": "officers/14b.png",
+    "committee": "Membership & Records Committee",
+    "works": "Represented freshmen concerns."
+  },
+  {
+    "id": 15,
+    "name": "Graciel Ann V. Martinez",
+    "role": "Sophomore Representative",
+    "img": "officers/15.png",
+    "altImg": "officers/15b.png",
+    "committee": "Membership & Records Committee",
+    "works": "Represented sophomores."
+  },
+  {
+    "id": 16,
+    "name": "Sheryn G. Concepcion",
+    "role": "Junior Representative",
+    "img": "officers/16.png",
+    "altImg": "officers/16b.png",
+    "committee": "Membership & Records Committee",
+    "works": "Represented juniors."
+  },
+  {
+    "id": 17,
+    "name": "Jaypee R. Abul",
+    "role": "Senior Representative",
+    "img": "officers/17.png",
+    "altImg": "officers/17b.png",
+    "committee": "Membership & Records Committee",
+    "works": "Represented seniors."
+  },
+
+  {
+    "id": 18,
+    "name": "Kyrie Alexis Temperante",
+    "role": "Documentation Officer",
+    "img": "officers/18.png",
+    "altImg": "officers/18b.png",
+    "committee": "Media & Publicity Committee",
+    "works": "Managed documentation and photos."
+  },
+  {
+    "id": 19,
+    "name": "Reymart Ramirez",
+    "role": "Videographer",
+    "img": "officers/19.png",
+    "altImg": "officers/19b.png",
+    "committee": "Media & Publicity Committee",
+    "works": "Shot videos and coverage."
+  },
+  {
+    "id": 20,
+    "name": "Marc Kevin Sumio",
+    "role": "Video Editor",
+    "img": "officers/20.png",
+    "altImg": "officers/20b.png",
+    "committee": "Media & Publicity Committee",
+    "works": "Edited official videos."
+  },
+  {
+    "id": 21,
+    "name": "Nicole P. Asuero",
+    "role": "Broadcaster",
+    "img": "officers/21.png",
+    "altImg": "officers/21b.png",
+    "committee": "Media & Publicity Committee",
+    "works": "Hosted broadcasts."
+  },
+  {
+    "id": 22,
+    "name": "Marciano Louie V. Navarro",
+    "role": "Broadcaster",
+    "img": "officers/22.png",
+    "altImg": "officers/22b.png",
+    "committee": "Media & Publicity Committee",
+    "works": "Hosted shows and streams."
+  },
+  {
+    "id": 23,
+    "name": "Lhord Jedrick C. Mauricio",
+    "role": "Broadcaster",
+    "img": "officers/23.png",
+    "altImg": "officers/23b.png",
+    "committee": "Media & Publicity Committee",
+    "works": "Handled broadcasting duties."
+  },
+  {
+    "id": 24,
+    "name": "Deejay V. Justo",
+    "role": "News Writer & Caption Maker",
+    "img": "officers/24.png",
+    "altImg": "officers/24b.png",
+    "committee": "Media & Publicity Committee",
+    "works": "Wrote articles and captions."
+  },
+
+  {
+    "id": 25,
+    "name": "Annica Glaiza C. Retutas",
+    "role": "Creative Head",
+    "img": "officers/25.png",
+    "altImg": "officers/25b.png",
+    "committee": "Creative Development Team",
+    "works": "Led creative direction."
+  },
+  {
+    "id": 26,
+    "name": "Kath Leen Pascua",
+    "role": "Media & Online Officer",
+    "img": "officers/26.png",
+    "altImg": "officers/26b.png",
+    "committee": "Creative Development Team",
+    "works": "Managed social media."
+  },
+  {
+    "id": 27,
+    "name": "Thizally Z. Dumalay",
+    "role": "Layout Artist",
+    "img": "officers/27.png",
+    "altImg": "officers/27b.png",
+    "committee": "Creative Development Team",
+    "works": "Designed layouts and graphics."
+  },
+  {
+    "id": 28,
+    "name": "Jel Elijah Gabrian",
+    "role": "Layout Artist",
+    "img": "officers/28.png",
+    "altImg": "officers/28b.png",
+    "committee": "Creative Development Team",
+    "works": "Created layouts and posters."
+  },
+  {
+    "id": 29,
+    "name": "Emmanuel G. Due",
+    "role": "Sentinel",
+    "img": "officers/29.png",
+    "altImg": "officers/29b.png",
+    "committee": "Creative Development Team",
+    "works": "Handled event logistics."
+  },
+  {
+    "id": 30,
+    "name": "Mark Jay Aggabao",
+    "role": "Sentinel",
+    "img": "officers/30.png",
+    "altImg": "officers/30b.png",
+    "committee": "Creative Development Team",
+    "works": "Assisted with safety and checks."
+  }
+]
