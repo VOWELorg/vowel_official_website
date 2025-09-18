@@ -1,0 +1,17 @@
+[
+  {
+    "images": ["event1a.jpg", "event1b.jpg", "event1c.jpg"],
+    "caption": "Panagsasangbay 2025",
+    "story": "The Isabela State University–City of Ilagan Campus held its annual PANAGSASANGBAY Freshmen Walk on August 14, marking the official welcome of first-year students into the university."
+  },
+  {
+    "images": ["event2a.jpg", "event2b.jpg", "event2c.jpg"],
+    "caption": "Highlights Competitions and Games at VOWEL Team Building 2025",
+    "story": "Day 2 of the VOWEL Team Building 2025 showcased the talents and teamwork of the members through a series of interactive activities and contests. "
+  },
+  {
+    "images": ["event3a.jpg", "event3b.jpg", "event3c.jpg"],
+    "caption": "ISU–I inducts new student leaders at CCL Night 2025",
+    "story": "The Isabela State University–City of Ilagan Campus (ISU–I) formally inducted its new set of student leaders during the Congress of Campus Leaders (CCL) Night 2025 held on September 4 at the City of Ilagan Community Center."
+  }
+]
