@@ -44,16 +44,6 @@
     "altImg": "officers/5b.png",
     "works": "Assists the General Secretary in documentation and communication."
   },
-
-  {
-    "id": 7,
-    "name": "LYCABEA MAE S. BATNAG",
-    "role": "Treasurer",
-    "committee": "Budget and Resources Committee",
-    "img": "officers/7.png",
-    "altImg": "officers/7b.png",
-    "works": "Manages funds, budgets, and financial planning."
-  },
   {
     "id": 6,
     "name": "ANGELYN J. COLOMA",
@@ -62,6 +52,15 @@
     "img": "officers/6.png",
     "altImg": "officers/6b.png",
     "works": "Conducts financial audits and ensures transparency."
+  },
+    {
+    "id": 7,
+    "name": "LYCABEA MAE S. BATNAG",
+    "role": "Treasurer",
+    "committee": "Budget and Resources Committee",
+    "img": "officers/7.png",
+    "altImg": "officers/7b.png",
+    "works": "Manages funds, budgets, and financial planning."
   },
   {
     "id": 8,
@@ -102,7 +101,7 @@
 
   {
     "id": 12,
-    "name": "BEJAY B. BASILIO",
+    "name": "BEEJAY B. BASILIO",
     "role": "Attendance Officer",
     "committee": "Membership & Records Committee",
     "img": "officers/12.png",
@@ -193,7 +192,7 @@
   },
   {
     "id": 22,
-    "name": "LHORD JEDRICK C. MAURICIO",
+    "name": "MARCIANO LOUIE V. NAVARRO",
     "role": "Broadcaster 2",
     "committee": "Media & Publicity Committee",
     "img": "officers/22.png",
@@ -202,7 +201,7 @@
   },
   {
     "id": 23,
-    "name": "MARCIANO LOUIE V. NAVARRO",
+    "name": "LHORD JEDRICK C. MAURICIO",
     "role": "Broadcaster 3",
     "committee": "Media & Publicity Committee",
     "img": "officers/23.png",
@@ -212,7 +211,7 @@
   {
     "id": 24,
     "name": "DEEJAY V. JUSTO",
-    "role": "News Writer & Caption Maker 1",
+    "role": "News Writer & Captionist",
     "committee": "Media & Publicity Committee",
     "img": "officers/24.png",
     "altImg": "officers/24b.png",
@@ -230,8 +229,8 @@
   },
   {
     "id": 26,
-    "name": "KATH LEEN T. PASCUA",
-    "role": "Media & Online Officer",
+    "name": "THIZALLY Z. DUMALAY",
+    "role": "Layout Artist 1",
     "committee": "Creative Development Team",
     "img": "officers/26.png",
     "altImg": "officers/26b.png",
@@ -239,8 +238,8 @@
   },
   {
     "id": 27,
-    "name": "THIZALLY Z. DUMALAY",
-    "role": "Layout Artist 1",
+    "name": "JEL ELIJAH A. GABRIAN",
+    "role": "Layout Artist 2",
     "committee": "Creative Development Team",
     "img": "officers/27.png",
     "altImg": "officers/27b.png",
@@ -248,8 +247,8 @@
   },
   {
     "id": 28,
-    "name": "JEL ELIJAH A. GABRIAN",
-    "role": "Layout Artist 2",
+    "name": "KATHLEEN T. PASCUA",
+    "role": "Online & MediaOfficer",
     "committee": "Creative Development Team",
     "img": "officers/28.png",
     "altImg": "officers/28b.png",
