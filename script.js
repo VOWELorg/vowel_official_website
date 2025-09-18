@@ -149,6 +149,12 @@ async function loadEvents() {
 loadEvents();
 
 /* ===== Officer Modal ===== */
+/* ===== Game Variables ===== */
+let gameTimer;
+let timeElapsed = 0;
+let moveCount = 0;
+let highScore = localStorage.getItem('memoryGameTimeHighScore') || 0;
+let gameStarted = false;
 
 const cardsArray = ['🍎','🍌','🍇','🍒','🍋','🥝']; // icons
 let cards = [...cardsArray, ...cardsArray]; // duplicate for pairs
@@ -162,39 +168,143 @@ const gameResult = document.getElementById('gameResult');
 let flipped = [];
 let matched = [];
 
-cards.forEach((icon, index) => {
-  const card = document.createElement('div');
-  card.classList.add('card');
-  card.dataset.icon = icon;
-  card.innerHTML = icon;
-  
-  card.addEventListener('click', () => flipCard(card));
-  gameBoard.appendChild(card);
-});
+// Initialize game
+function initGame() {
+    // Display high score
+    document.getElementById('high-score').textContent = highScore ? `${highScore}s` : 'N/A';
+    
+    // Clear game board
+    gameBoard.innerHTML = '';
+    
+    // Create cards
+    cards.forEach((icon, index) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.dataset.icon = icon;
+        card.innerHTML = icon;
+        
+        card.addEventListener('click', () => flipCard(card));
+        gameBoard.appendChild(card);
+    });
+}
+
+// Initialize game on load
+initGame();
 
 function flipCard(card){
-  if(flipped.length < 2 && !card.classList.contains('flipped')){
-    card.classList.add('flipped');
-    flipped.push(card);
+    if(flipped.length < 2 && !card.classList.contains('flipped') && !matched.includes(card)){
+        // Start timer on first card flip
+        if (!gameStarted) {
+            startTimer();
+            gameStarted = true;
+        }
+        
+        card.classList.add('flipped');
+        flipped.push(card);
+        updateMoveCount(); // Increment move counter
 
-    if(flipped.length === 2){
-      setTimeout(checkMatch, 600);
+        if(flipped.length === 2){
+            setTimeout(checkMatch, 600);
+        }
     }
-  }
 }
 
 function checkMatch(){
-  const [c1, c2] = flipped;
-  if(c1.dataset.icon === c2.dataset.icon){
-    matched.push(c1, c2);
-    if(matched.length === cards.length){
-      gameResult.textContent = "🎉 You won!";
+    const [c1, c2] = flipped;
+    if(c1.dataset.icon === c2.dataset.icon){
+        matched.push(c1, c2);
+        if(matched.length === cards.length){
+            // Game completed!
+            stopTimer();
+            checkHighScore();
+            showConfetti();
+            showPlayAgainButton();
+            gameResult.textContent = "🎉 You won in " + timeElapsed + " seconds with " + moveCount + " moves!";
+        }
+    } else {
+        setTimeout(() => {
+            c1.classList.remove('flipped');
+            c2.classList.remove('flipped');
+        }, 600);
     }
-  } else {
-    c1.classList.remove('flipped');
-    c2.classList.remove('flipped');
-  }
-  flipped = [];
+    flipped = [];
+}
+
+/* ===== Game Stats Functions ===== */
+function startTimer() {
+    clearInterval(gameTimer);
+    timeElapsed = 0;
+    document.getElementById('timer').textContent = '0s';
+    gameTimer = setInterval(() => {
+        timeElapsed++;
+        document.getElementById('timer').textContent = `${timeElapsed}s`;
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(gameTimer);
+}
+
+function updateMoveCount() {
+    moveCount++;
+    document.getElementById('move-count').textContent = moveCount;
+}
+
+function checkHighScore() {
+    // High score is now based on time (lower is better)
+    if ((timeElapsed < highScore || highScore === 0) && matched.length === cards.length) {
+        highScore = timeElapsed;
+        localStorage.setItem('memoryGameTimeHighScore', highScore);
+        document.getElementById('high-score').textContent = `${highScore}s`;
+    }
+}
+
+function showPlayAgainButton() {
+    document.getElementById('play-again-btn').style.display = 'block';
+}
+
+function resetGame() {
+    // Reset game state
+    stopTimer();
+    flipped = [];
+    matched = [];
+    timeElapsed = 0;
+    moveCount = 0;
+    gameStarted = false;
+    
+    // Update UI
+    document.getElementById('timer').textContent = '0s';
+    document.getElementById('move-count').textContent = '0';
+    document.getElementById('play-again-btn').style.display = 'none';
+    gameResult.textContent = "";
+    
+    // Reshuffle cards
+    cards = [...cardsArray, ...cardsArray].sort(() => 0.5 - Math.random());
+    initGame();
+}
+
+// Add event listener to play again button
+document.getElementById('play-again-btn').addEventListener('click', resetGame);
+
+function showConfetti() {
+    // Check if ConfettiGenerator is available
+    if (typeof ConfettiGenerator !== 'undefined') {
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        if (confettiCanvas) {
+            confettiCanvas.style.display = 'block';
+            
+            const confettiSettings = { target: 'confetti-canvas' };
+            const confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+            
+            setTimeout(() => {
+                confetti.clear();
+                confettiCanvas.style.display = 'none';
+            }, 3000);
+        }
+    } else {
+        console.error('ConfettiGenerator is not loaded. Make sure to include the confetti library.');
+    }
 }
 
 /* Year in footer */
@@ -385,3 +495,57 @@ async function initOfficers() {
   }
 }
 
+// Dark/Light mode toggle
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Load saved preference
+if (localStorage.getItem('theme') === 'light') {
+  body.classList.add('light-mode');
+  themeToggle.textContent = '🌙';
+} else {
+  themeToggle.textContent = '☀️';
+}
+
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('light-mode');
+  const isLight = body.classList.contains('light-mode');
+  themeToggle.textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+
+// Peach cursor effect
+document.addEventListener('DOMContentLoaded', function() {
+  const cursor = document.querySelector('.peach-cursor');
+  const cursorFollower = document.querySelector('.peach-cursor-follower');
+  
+  if (cursor && cursorFollower) {
+    document.addEventListener('mousemove', function(e) {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      
+      // Follower follows with a slight delay
+      setTimeout(function() {
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+      }, 100);
+    });
+    
+    // Interactive elements effect
+    const interactiveElements = document.querySelectorAll('a, button, .btn, input, textarea, .officer');
+    
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.8)';
+        cursorFollower.style.opacity = '0.8';
+      });
+      
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorFollower.style.opacity = '0.5';
+      });
+    });
+  }
+});
