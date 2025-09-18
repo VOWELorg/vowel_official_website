@@ -46,21 +46,21 @@
   },
 
   {
-    "id": 6,
+    "id": 7,
     "name": "LYCABEA MAE S. BATNAG",
     "role": "Treasurer",
     "committee": "Budget and Resources Committee",
-    "img": "officers/6.png",
-    "altImg": "officers/6b.png",
+    "img": "officers/7.png",
+    "altImg": "officers/7b.png",
     "works": "Manages funds, budgets, and financial planning."
   },
   {
-    "id": 7,
+    "id": 6,
     "name": "ANGELYN J. COLOMA",
     "role": "Auditor",
     "committee": "Budget and Resources Committee",
-    "img": "officers/7.png",
-    "altImg": "officers/7b.png",
+    "img": "officers/6.png",
+    "altImg": "officers/6b.png",
     "works": "Conducts financial audits and ensures transparency."
   },
   {
@@ -274,3 +274,4 @@
     "works": "Supports event logistics and safety checks."
   }
 ]
+
