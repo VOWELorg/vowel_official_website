@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
 <title>VOWEL Organization</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -26,6 +27,7 @@
       <a href="#membership">Membership</a>
       <a href="#officers">Officers</a>
       <a href="#contact" class="btn btn-outline">Contact</a>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Open Menu"><span></span></button>
   </div>
@@ -157,14 +159,14 @@
   </div>
 </div>
 
-  <!-- CONTACT + MINI GAME -->
+ <!-- CONTACT + MINI GAME -->
 <section id="contact" class="section reveal">
   <div class="container">
     <h2>Contact Us & Interactive Experience</h2>
     <p class="lead" style="margin-top:0">Get in touch with us or enjoy our interactive memory game!</p>
   </div>
   <div class="contact-grid">
-    
+
     <!-- Left Column: Contact Form + Facebook -->
     <div class="contact-left">
       <h2> Contact Us </h2>
@@ -183,11 +185,21 @@
 
     <!-- Right Column: Memory Game -->
     <div class="mini-game">
-      <h2> <center>Mini Flip Game</center></h2>
+      <h2><center>Mini Flip Game</center></h2>
+      
+      <!-- Game stats row -->
+      <div class="game-stats">
+          <div class="stat">Time: <span id="timer" class="stat-value">0s</span></div>
+          <div class="stat">Moves: <span id="move-count" class="stat-value">0</span></div>
+          <div class="stat">Best: <span id="high-score" class="stat-value">0s</span></div>
+      </div>
+      
       <div id="memory-game" class="memory-game"></div>
       <p id="gameResult"></p>
+      
+      <!-- Play Again Button -->
+      <button id="play-again-btn" class="play-again-btn">Play Again</button>
     </div>
-
   </div>
 </section>
 
@@ -204,6 +216,10 @@
 </footer>
 
 <script src="script.js"></script>
+
+<div class="peach-cursor"></div>
+<div class="peach-cursor-follower"></div>
+<canvas id="confetti-canvas"></canvas>
 
 </body>
 </html>
