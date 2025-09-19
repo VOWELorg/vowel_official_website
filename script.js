@@ -549,3 +549,87 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// Add theme toggle to mobile menu
+document.addEventListener('DOMContentLoaded', function() {
+  // Create mobile theme toggle button
+  const mobileThemeToggle = document.createElement('button');
+  mobileThemeToggle.className = 'theme-toggle mobile-theme-toggle';
+  mobileThemeToggle.innerHTML = '🌓';
+  mobileThemeToggle.setAttribute('aria-label', 'Toggle theme');
+  
+  // Find mobile panel and add theme toggle
+  const mobilePanel = document.querySelector('.mobile-panel');
+  if (mobilePanel) {
+    mobilePanel.appendChild(mobileThemeToggle);
+  }
+  
+  // Sync both theme toggles
+  const themeToggles = document.querySelectorAll('.theme-toggle');
+  themeToggles.forEach(toggle => {
+    toggle.addEventListener('click', function() {
+      document.body.classList.toggle('light-mode');
+      // Sync all toggles
+      themeToggles.forEach(t => {
+        t.innerHTML = document.body.classList.contains('light-mode') ? '🌙' : '☀️';
+      });
+    });
+  });
+});
+
+// Theme toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Get theme toggle button
+  const themeToggle = document.querySelector('.theme-toggle');
+  
+  // Check for saved theme preference or respect OS preference
+  if (localStorage.getItem('theme') === 'light-mode') {
+    document.body.classList.add('light-mode');
+  } else if (localStorage.getItem('theme') === 'dark-mode') {
+    document.body.classList.remove('light-mode');
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    document.body.classList.add('light-mode');
+  }
+  
+  // Update toggle button icon based on current theme
+  updateThemeIcon();
+  
+  // Add click event to theme toggle
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('light-mode');
+      
+      // Save theme preference
+      if (document.body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light-mode');
+      } else {
+        localStorage.setItem('theme', 'dark-mode');
+      }
+      
+      updateThemeIcon();
+    });
+  }
+  
+  // Listen for system theme changes
+  if (window.matchMedia) {
+    const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: light)');
+    colorSchemeQuery.addEventListener('change', (e) => {
+      // Only auto-switch if user hasn't explicitly set a preference
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          document.body.classList.add('light-mode');
+        } else {
+          document.body.classList.remove('light-mode');
+        }
+        updateThemeIcon();
+      }
+    });
+  }
+  
+  function updateThemeIcon() {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+      themeToggle.innerHTML = document.body.classList.contains('light-mode') ? '🌙' : '☀️';
+    }
+  }
+});
